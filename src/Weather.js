@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import "./Weather.css";
-import FormattedDate from "./FormattedDate"
+import WeatherInfo from "./WeatherInfo"
 import axios from "axios";
 
 export default function Weather (props) {
     const [weatherData,setWeatherData] = useState({ready:false});
+    const [city,setCity] = useState (props.defaultCity);
 
     function handleResponse(response) {  
-        console.log(response.data);
         setWeatherData ({
             ready: true,
             temperature: (Math.round(response.data.main.temp)),
@@ -15,71 +15,46 @@ export default function Weather (props) {
             wind: response.data.wind.speed,
             city: response.data.name,
             humidity: response.data.main.humidity,
-            feelsLike: response.data.main.feels_like,
+            feelsLike: (Math.round(response.data.main.feels_like)),
             description: response.data.weather[0].description,
-            iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+            iconUrl: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
         });
     }
+
+    function handleSubmit (event) {
+    event.preventDefault ();
+    search(city);
+}
+
+    function handleCityChange (event) {
+        setCity(event.target.value);
+
+    }
+
+    function search () {
+        const apiKey = `b27f9bdedbf0a33e84256c7e1fd1e262`;
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        axios.get(url).then(handleResponse); }
 
     if (weatherData.ready) { 
         return (
             <div className="Weather">
-              
-                <form> 
+                <form onSubmit={handleSubmit}> 
                     <div className="row"> 
                     <div className= "col-9">
-                    <input type="search" placeholder="Enter a city" className="form-control" autoFocus="on"/>
+                    <input type="search" placeholder="Enter a city" className="form-control" autoFocus="on" onChange={handleCityChange}/>
                     </div>
                     <div className="col-3"> 
-                    <input type="submit" value= "Search" className= "btn btn-primary w-100"/>
+                    <input  type="submit" value= "Search" className= "btn btn-primary w-100" />
                     </div>
                     </div>
                 </form>
-                <br/>
-            <div className="row">
-                <div className="col-4"> 
-        <img src={weatherData.iconUrl} 
-        alt={weatherData.description}
-        width={60} height={60}/>
-        <span className= "temperature"> {weatherData.temperature}</span>
-        <span className= "unit"> °C | F </span> 
-        </div>
-        <div className="col-3"> 
-        <div className="parameters">
-            Feels like: 
-            <span className= "feels-like">  {weatherData.feelsLike} </span> °C
-            <br/>
-            Humidity:
-            <span className= "humidity">  {weatherData.humidity} </span> %
-            <br/>
-            Wind:
-            <span className= "wind"> {weatherData.wind} </span> km/h
-            </div>
-            </div>
-            <div className="col-5"> 
-            <h2> {weatherData.city} </h2> 
-            <ul> 
-                <li> 
-                <FormattedDate date= {weatherData.date}/>
-                </li>
-                <li className="text-capitalize"> 
-                {weatherData.description}
-                </li>
-            </ul>
-            </div>
-            </div>
-            <br/>
-            <div className="row">
-                <span > Temperature |  Precipitation   | Wind </span> 
-                </div> 
+                <WeatherInfo data={weatherData}/>
                  </div> 
         )
     } 
     else  {
-    const apiKey = `b27f9bdedbf0a33e84256c7e1fd1e262`;
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
-    axios.get(url).then(handleResponse);
-
+        search ();
     return "Loading..."
 }
     

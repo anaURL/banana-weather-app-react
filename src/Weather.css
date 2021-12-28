@@ -6,7 +6,12 @@
     border-radius: 4px;
     font-family: 'Roboto', sans-serif;
     display: grid;
+    margin:0 auto;
     padding: 15px;
+}
+
+.WeatherInfo {
+    margin-top: 25px;
 }
 
 .Weather h2 {
@@ -52,6 +57,6 @@
     line-height: 15px;
     padding-left: -15px;
     padding-top: 8px;
-    margin-left: -20px;
+    margin-left: -12px;
 }
 
