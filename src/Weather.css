@@ -11,7 +11,7 @@
 }
 
 .WeatherInfo {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 .Weather canvas {
     margin-right: 2px;
@@ -37,19 +37,16 @@
 }
 
 .Weather .temperature  {
-    font-weight: 400;
     font-weight: bold;
     color: #e8eaed;
-    display: inline-block;
     font-size: 48px;
     line-height: 60px;
-    vertical-align: top;
-    margin-left: 5px;
+    text-align: center;
 }
 
 .Weather .unit {
     text-align: center;
-    position: relative; bottom:30px;
+    position: relative; bottom:25px;
 }
 
 .Weather .parameters {
