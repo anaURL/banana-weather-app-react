@@ -56,10 +56,14 @@
     list-style-type:none; 
     color: #9aa0a6;
     font-size: 12px;
-    margin-left: -16px;
+    margin-left: -22px;
     line-height: 15px;
     padding-top: 8px;
    text-align: left;
+}
+
+.WeatherForecast {
+    color: white;
 }
 
 a { 
