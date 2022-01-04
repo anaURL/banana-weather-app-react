@@ -39,7 +39,7 @@
 .WeatherInfo .temperature  {
     font-weight: bold;
     color: #ffff;
-    font-size: 48px;
+    font-size: 42px;
     line-height: 60px;
     text-align: center;
     vertical-align: top;
@@ -47,7 +47,7 @@
 
 .WeatherInfo .celsius {
     text-align: center;
-    position: relative; bottom:32px;
+    position: relative; bottom:27px;
     text-decoration: none;
 }
 
