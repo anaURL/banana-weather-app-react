@@ -36,7 +36,7 @@
     text-align: right;
 }
 
-.Weather .temperature  {
+.WeatherInfo .temperature  {
     font-weight: bold;
     color: #ffff;
     font-size: 48px;
@@ -45,7 +45,7 @@
     vertical-align: top;
 }
 
-.Weather .unit {
+.WeatherInfo .celsius {
     text-align: center;
     position: relative; bottom:32px;
     text-decoration: none;
